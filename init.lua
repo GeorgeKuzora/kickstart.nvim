@@ -9,17 +9,8 @@
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 
--- vim.g.mapleader = ' '
--- vim.g.maplocalleader = ' '
-
-for _, source in ipairs {
-  "custom.options",
-  "custom.mappings",
-  "custom.config",
-} do
-  local status_ok, fault = pcall(require, source)
-  if not status_ok then vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault) end
-end
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -44,6 +35,15 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({ { import = 'custom.plugins' }, }, {})
 
+
+for _, source in ipairs {
+  "custom.options",
+  "custom.mappings",
+  "custom.config",
+} do
+  local status_ok, fault = pcall(require, source)
+  if not status_ok then vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault) end
+end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

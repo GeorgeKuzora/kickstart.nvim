@@ -40,10 +40,10 @@ return {
 
   {
     -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    'catppuccin/nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
 
@@ -75,5 +75,49 @@ return {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- for better escaping sequencies
+  {
+    "max397574/better-escape.nvim",
+    event = "InsertCharPre",
+    opts = {
+      timeout = 300,
+      mapping = { "ii", "шш" },
+      clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+      keys = function()
+        return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
+      end -- keys used for escaping, if it is a function will use the result everytime
+    },
+  },
+  -- New surround movements
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
+  },
 
+  -- raindow parenticis
+  {
+    "HiPhish/nvim-ts-rainbow2",
+    event = "BufRead",
+  },
+  -- remove trailing spaces
+  {
+    "thirtythreeforty/lessspace.vim",
+    event = "BufRead",
+  },
+  -- undotree
+  {
+    "mbbill/undotree",
+    event = "VeryLazy",
+    -- mappings = {
+    --   n = {
+    --   [userleader .. "u"] = { "<cmd>UndotreeToggle<CR>", desc = "Toggle Undo-tree" },
+    --   },
+    -- },
+  },
 }

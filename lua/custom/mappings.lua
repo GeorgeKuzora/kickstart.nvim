@@ -30,6 +30,8 @@ km.set("v", "<M-k>", ":m '<-2<CR>gv=gv")
 -- Move text up and down
 km.set("x", "<M-j>", ":move '>+1<CR>gv-gv")
 km.set("x", "<M-k>", ":move '<-2<CR>gv-gv")
+km.set('n', "<leader>o", "o<Esc>k", { desc = "Insert empty line bellow" })
+km.set('n', "<leader>O", "O<Esc>j", { desc = "Insert empty line above" })
 
 return {
   n = {
@@ -48,8 +50,6 @@ return {
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
-    ["<leader>o"] = { "o<Esc>k", desc = "Insert empty line bellow" },
-    ["<leader>O"] = { "O<Esc>j", desc = "Insert empty line above" },
     ["J"] = { "mzJ`z", desc = "Join Lines" },
     ["<C-d>"] = { "<C-d>zz", desc = "Scroll half down" },
     ["<C-u>"] = { "<C-u>zz", desc = "Scroll half up" },

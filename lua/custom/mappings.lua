@@ -30,23 +30,20 @@ km.set("v", "<M-k>", ":m '<-2<CR>gv=gv")
 -- Move text up and down
 km.set("x", "<M-j>", ":move '>+1<CR>gv-gv")
 km.set("x", "<M-k>", ":move '<-2<CR>gv-gv")
+
+-- Insert live without insert mode
 km.set('n', "<leader>o", "o<Esc>k", { desc = "Insert empty line bellow" })
 km.set('n', "<leader>O", "O<Esc>j", { desc = "Insert empty line above" })
+
+-- Undo-tree
+km.set('n', "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle Undo-tree" })
+
 
 return {
   n = {
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
-    ["<leader>bD"] = {
-      function()
-        require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
-          require("astronvim.utils.buffer").close(
-            bufnr)
-        end)
-      end,
-      desc = "Pick to close",
-    },
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
@@ -66,22 +63,9 @@ return {
     "Change word under cursor in a buffer" },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
-    [userleader .. "u"] = { vim.cmd.UndotreeToggle, desc = "Toggle Undo-tree" },
     ["x"] = { '"_x', desc = "Delete char into void" },
     [userleader .. "g"] = { vim.cmd.Git, desc = "Toggle git" },
     ["<leader>lj"] = { '<cmd>lua vim.lsp.buf.hover()<CR>', desc = "Hover documentation" },
-    ["<C-q>"] = false,
-    ["<C-s>"] = false,
-    [userleader .. "o"] = {
-      function()
-        if vim.bo.filetype == "neo-tree" then
-          vim.cmd.wincmd "p"
-        else
-          vim.cmd.Neotree "focus"
-        end
-      end,
-      desc = "Toggle Explorer Focus",
-    }
   },
   v = {
     ["<"] = { "<gv", desc = "Indent left" },

@@ -46,9 +46,6 @@ km.set('x', "<leader>d", [["_d]], { desc = "Delete without killing" })
 km.set("x", "<M-j>", ":move '>+1<CR>gv-gv")
 km.set("x", "<M-k>", ":move '<-2<CR>gv-gv")
 
--- Visual --
--- Visual Block --
-
 
 -- INSERT MODE
 km.set('i', "<c-u>", "<c-g>u<c-u>", { desc = "Delete character" })
@@ -76,3 +73,20 @@ km.set('n', "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndo-tree" }
 
 -- Buffers
 km.set('n', "<leader>bn", "<cmd>tabnew<cr>", { desc = "[N]ew [b]uffer" })
+
+
+local wk = require("which-key")
+-- As an example, we will create the following mappings:
+--  * <leader>ff find files
+--  * <leader>fr show recent files
+--  * <leader>fb Foobar
+-- we'll document:
+--  * <leader>fn new file
+--  * <leader>fe edit file
+-- and hide <leader>1
+
+wk.register({
+  b = {
+    name = "[B]uffers", -- optional group name
+  },
+}, { prefix = "<leader>" })

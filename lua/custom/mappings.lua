@@ -17,7 +17,7 @@ km.set('n', "n", "nzzzv", { desc = "Find next" })
 km.set('n', "N", "Nzzzv", { desc = "Find previous" })
 km.set('n', "<leader>d", [["_d]], { desc = "Delete without killing" })
 km.set('n', "x", '"_x', { desc = "Delete char into void" })
-km.set('n', "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+km.set('n', "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Change word under cursor in a buffer" })
 -- Insert live without insert mode
 km.set('n', "<leader>o", "o<Esc>k", { desc = "Insert empty line bellow" })
@@ -59,11 +59,11 @@ km.set('i', "<c-l>", "<c-6>", { desc = "Switch input method" })
 -- Diagnostic keymaps
 km.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to [previous] [D]iagnostic message' })
 km.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to [next] [D]iagnostic message' })
-km.set('n', '<leader>qe', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-km.set('n', '<leader>ql', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+km.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+km.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- QuickFix list
-km.set('n', "<leader>qq", "<cmd>copen<CR>", { desc = "Open [Q]uickFix list" })
+km.set('n', "<leader>q", "<cmd>copen<CR>", { desc = "Open [Q]uickFix list" })
 km.set('n', "]q", "<cmd>cnext<CR>zz", { desc = "Move next in [Q]uickFix list" })
 km.set('n', "[q", "<cmd>cprev<CR>zz", { desc = "Move previous in [Q]uickFix list" })
 km.set('n', "]l", "<cmd>lnext<CR>zz", { desc = "Move to next [L]ocation" })
@@ -88,5 +88,14 @@ local wk = require("which-key")
 wk.register({
   b = {
     name = "[B]uffers", -- optional group name
+  },
+  l = {
+    name = "[L]SP", -- optional group name
+  },
+  g = {
+    name = "[G]it", -- optional group name
+  },
+  d = {
+    name = "[D]iagnostics", -- optional group name
   },
 }, { prefix = "<leader>" })

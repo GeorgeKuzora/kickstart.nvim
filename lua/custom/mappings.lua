@@ -87,15 +87,18 @@ local wk = require("which-key")
 
 wk.register({
   b = {
-    name = "[B]uffers", -- optional group name
+    name = "[B]uffers",
   },
   l = {
-    name = "[L]SP", -- optional group name
+    name = "[L]SP",
   },
   g = {
-    name = "[G]it", -- optional group name
+    name = "[G]it",
   },
   d = {
-    name = "[D]iagnostics", -- optional group name
+    name = "[D]iagnostics",
+  },
+  w = {
+    name = "[W]orkspaces",
   },
 }, { prefix = "<leader>" })

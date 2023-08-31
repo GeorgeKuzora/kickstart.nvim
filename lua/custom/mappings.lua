@@ -73,6 +73,8 @@ km.set('n', "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndo-tree" }
 
 -- Buffers
 km.set('n', "<leader>bn", "<cmd>tabnew<cr>", { desc = "[N]ew [b]uffer" })
+-- Explorer
+km.set("n", "<leader>e", vim.cmd.Ex)
 
 
 local wk = require("which-key")

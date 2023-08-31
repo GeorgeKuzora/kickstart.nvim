@@ -82,7 +82,7 @@ opt.title = true                                  -- set the window’s title, r
 -- folding
 opt.foldmethod = 'indent'                         -- Fold based on indention levels.
 opt.foldnestmax = 3                               -- Only fold up to three nested levels.
-opt.foldenable = true                             -- Enable folding by default.
+opt.foldenable = false                            -- Enable folding by default.
 -- undoing
 opt.autoread = true                               -- Automatically re-read files if unmodified inside Vim.
 opt.backspace = { 'indent', 'eol', 'start' }      -- Allow backspacing over indention, line breaks and insertion start.

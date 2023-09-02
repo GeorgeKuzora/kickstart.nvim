@@ -9,6 +9,10 @@ return {
     -- Adds LSP completion capabilities
     'hrsh7th/cmp-nvim-lsp',
 
+    -- Sources
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
     -- Adds a number of user-friendly snippets
     'rafamadriz/friendly-snippets',
   },
@@ -26,6 +30,13 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      enabled = function()
+        if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then return false end
+        return vim.g.cmp_enabled
+      end,
+      preselect = cmp.PreselectMode.None,
+
+
       mapping = cmp.mapping.preset.insert {
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -56,8 +67,10 @@ return {
         end, { 'i', 's' }),
       },
       sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = 'nvim_lsp', priority = 1000 },
+        { name = 'luasnip',  priority = 750 },
+        { name = "buffer",   priority = 500 },
+        { name = "path",     priority = 250 },
       },
     }
   end,

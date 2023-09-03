@@ -21,6 +21,8 @@ return {
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
+    local border_opts =
+      { border = "single", winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }
     require('luasnip.loaders.from_vscode').lazy_load()
     luasnip.config.setup {}
 
@@ -35,13 +37,21 @@ return {
         return vim.g.cmp_enabled
       end,
       preselect = cmp.PreselectMode.None,
-
+      window = {
+            completion = cmp.config.window.bordered(border_opts),
+            documentation = cmp.config.window.bordered(border_opts),
+          },
 
       mapping = cmp.mapping.preset.insert {
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<Up>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+        ['<Down>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
+        ['<C-k>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+        ['<C-j>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-e>'] = cmp.mapping.abort(),
         ['<C-Space>'] = cmp.mapping.complete {},
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,

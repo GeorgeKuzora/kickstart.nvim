@@ -10,10 +10,10 @@ return {
 
     -- NOTE: If you are having trouble with this installation,
     --       refer to the README for telescope-fzf-native for more instructions.
-    { "nvim-telescope/telescope-fzf-native.nvim", enabled = vim.fn.executable "make" == 1, build = "make" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", enabled = vim.fn.executable "make" == 1  },
   },
   cmd = "Telescope",
-  config = function()
+  opts = function()
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     local actions = require "telescope.actions"
@@ -37,8 +37,10 @@ return {
             ["<C-p>"] = actions.cycle_history_prev,
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
+            ["<C-c>"] = actions.close,
           },
-          n = { q = actions.close },
+          n = { q = actions.close,
+                ["<ESC>"] = actions.close, },
         },
       },
     }

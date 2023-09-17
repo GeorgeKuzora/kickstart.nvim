@@ -30,13 +30,14 @@ return {
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
+      -- signs = {
+      --   add = { text = "▎" },
+      --   change = { text = "▎" },
+      --   delete = { text = "▎" },
+      --   topdelete = { text = "契" },
+      --   changedelete = { text = "▎" },
+      --   untracked = { text = "▎" },
+      -- },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
           { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
@@ -135,10 +136,10 @@ return {
     end,
   },
   -- remove trailing spaces
-  {
-    "thirtythreeforty/lessspace.vim",
-    event = "BufRead",
-  },
+  -- {
+  --   "thirtythreeforty/lessspace.vim",
+  --   event = "BufRead",
+  -- },
   -- undotree
   {
     "mbbill/undotree",
@@ -167,5 +168,13 @@ return {
         highlight_grey = "LineNr",
       },
     } -- this is equalent to setup({}) function
+  },
+  {
+    'folke/trouble.nvim',
+    event = "VeryLazy",
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    event = "BufRead",
   },
 }

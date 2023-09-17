@@ -27,7 +27,17 @@ km.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- Move text up and down
 km.set("n", "<M-j>", "<Esc>:m .+1<CR>==")
 km.set("n", "<M-k>", "<Esc>:m .-2<CR>==")
-
+-- Better windows navigation
+-- km.set('n', "<C-h>", "<C-w>h")
+-- km.set('n', "<C-k>", "<C-w>k")
+-- km.set('n', "<C-j>", "<C-w>j")
+-- km.set('n', "<C-l>", "<C-w>l")
+km.set('n', ']b', ':bnext<CR>', { desc = "Next buffer" })
+km.set('n', '[b', ':bprevious<CR>, { desc = "Previous buffer" }')
+-- escape highlight search
+km.set('n', '<esc><esc>', ':noh<return><esc>')
+-- Use control-c instead of escape
+km.set('n', '<C-c>', '<Esc>')
 -- VISUAL MODE
 km.set('v', "<", "<gv", { desc = "Indent left" })
 km.set('v', ">", ">gv", { desc = "Indent right" })
@@ -36,6 +46,8 @@ km.set('v', "<leader>d", [["_d]], { desc = "Delete without killing" })
 -- Move text up and down
 km.set("v", "<M-j>", ":m '>+1<CR>gv=gv")
 km.set("v", "<M-k>", ":m '<-2<CR>gv=gv")
+-- km.set("v", "<M-j>", ":m .+1<CR>==")
+-- km.set("v", "<M-k>", ":m .-2<CR>==")
 
 -- VISUALBLOCK MODE
 km.set('x', "<", "<gv", { desc = "Indent left" })
@@ -59,11 +71,11 @@ km.set('i', "<c-l>", "<c-6>", { desc = "Switch input method" })
 -- Diagnostic keymaps
 km.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to [previous] [D]iagnostic message' })
 km.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to [next] [D]iagnostic message' })
-km.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-km.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+km.set('n', '<leader>qe', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+km.set('n', '<leader>ql', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- QuickFix list
-km.set('n', "<leader>q", "<cmd>copen<CR>", { desc = "Open [Q]uickFix list" })
+km.set('n', "<leader>qf", "<cmd>copen<CR>", { desc = "Open [Q]uick[F]ix list" })
 km.set('n', "]q", "<cmd>cnext<CR>zz", { desc = "Move next in [Q]uickFix list" })
 km.set('n', "[q", "<cmd>cprev<CR>zz", { desc = "Move previous in [Q]uickFix list" })
 km.set('n', "]l", "<cmd>lnext<CR>zz", { desc = "Move to next [L]ocation" })
@@ -72,7 +84,8 @@ km.set('n', "[l", "<cmd>lprev<CR>zz", { desc = "Move to previous [L]ocation" })
 km.set('n', "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndo-tree" })
 
 -- Buffers
-km.set('n', "<leader>bn", "<cmd>tabnew<cr>", { desc = "[N]ew [b]uffer" })
+km.set('n', "<leader>bn", vim.cmd.enew, { desc = "[N]ew [b]uffer" })
+km.set('n', "<leader>bd",vim.cmd.bdelete, { desc = "[D]elete [b]uffer" })
 -- Explorer
 km.set("n", "<leader>e", vim.cmd.Ex)
 
@@ -88,7 +101,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles', silent = true })
 vim.keymap.set('n', '<leader>fF',
   function() require("telescope.builtin").find_files { hidden = true, no_ignore = true } end,
   { desc = '[F]earch All [F]iles' })
@@ -132,6 +145,8 @@ vim.keymap.set('n', "<leader>gC", function() require("telescope.builtin").git_bc
 vim.keymap.set('n', "<leader>gt", function() require("telescope.builtin").git_status { use_file_path = true } end,
   { desc = "Git status" })
 local wk = require("which-key")
+-- Git status
+km.set('n', '<leader>gg', vim.cmd.Git, { desc = "Git fugitive status" })
 -- As an example, we will create the following mappings:
 --  * <leader>ff find files
 --  * <leader>fr show recent files
@@ -151,8 +166,8 @@ wk.register({
   g = {
     name = "[G]it",
   },
-  d = {
-    name = "[D]iagnostics",
+  q = {
+    name = "[Q]uickFix & Diagnostics",
   },
   s = {
     name = "[S]earch",

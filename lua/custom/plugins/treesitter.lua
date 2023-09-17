@@ -4,6 +4,7 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     "JoosepAlviste/nvim-ts-context-commentstring",
+    "nvim-treesitter/nvim-treesitter-refactor",
     { "windwp/nvim-ts-autotag", opts = { autotag = { enable_close_on_slash = false } } },
   },
   cmd = {
@@ -35,8 +36,18 @@ return {
 
       autotag = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        disable = function(_, bufnr) return vim.b[bufnr].large_buf end,
+      },
       indent = { enable = true },
+      refactor = {
+          highlight_definitions = {
+            enable = true,
+            -- Set to false if you have an `updatetime` of ~100.
+            clear_on_cursor_move = true,
+          },
+        },
       incremental_selection = {
         enable = true,
         keymaps = {
